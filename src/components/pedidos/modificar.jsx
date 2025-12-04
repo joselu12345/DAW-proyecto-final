@@ -1,71 +1,88 @@
-'use client'
+"use client";
 import { modificarPedido } from "@/lib/actions";
 import { useActionState, useEffect, useId } from "react";
 
-function PedidoModificar({ pedido, repartidores, pizzas }) {
-    const formId = useId()
+function PedidoModificar({ pedido, repartidores, platos }) {
+  const formId = useId();
 
-    const [state, action, pending] = useActionState(modificarPedido, {})
+  const [state, action, pending] = useActionState(modificarPedido, {});
 
-    useEffect(() => {
-        if (state.success) {
-            // toast.success(state.success)
-            document.getElementById(formId)?.closest('dialog')?.close()
-        }
-    }, [state])
+  useEffect(() => {
+    if (state.success) {
+      // toast.success(state.success)
+      document.getElementById(formId)?.closest("dialog")?.close();
+    }
+  }, [state]);
 
-    const IDs = pedido.pizzas.map(p => p.id)
+  const IDs = pedido.platos.map((p) => p.id);
 
-    return (
-        <form className="flex flex-col gap-4" action={action} id={formId}>
-            <h1 className="text-xl text-blue-500">Modificar pedido</h1>
-            <input type="hidden" name="id" defaultValue={pedido.id} />
+  return (
+    <form className="flex flex-col gap-4" action={action} id={formId}>
+      <h1 className="text-xl text-blue-500">Modificar pedido</h1>
+      <input type="hidden" name="id" defaultValue={pedido.id} />
 
-            <label> Fecha y hora:
-                <input name="fecha_hora" type="datetime-local" defaultValue={new Date(pedido.fecha_hora).toISOString().split('Z')[0]} />
-            </label>
+      <label>
+        {" "}
+        Fecha y hora:
+        <input
+          name="fecha_hora"
+          type="datetime-local"
+          defaultValue={new Date(pedido.fecha_hora).toISOString().split("Z")[0]}
+        />
+      </label>
 
-            <label> Nombre del cliente:
-                <input name="nombre_cliente" placeholder="Nombre cliente" defaultValue={pedido.nombre_cliente} />
-            </label>
+      <label>
+        {" "}
+        Nombre del cliente:
+        <input
+          name="nombre_cliente"
+          placeholder="Nombre cliente"
+          defaultValue={pedido.nombre_cliente}
+        />
+      </label>
 
-            <label> Nombre del cliente:
-                <input name="direccion_cliente" placeholder="Dirección cliente" defaultValue={pedido.direccion_cliente} />
-            </label>
-            
-            <p className="font-bold">Repartidor</p>
-            <select name="repartidorId" defaultValue={pedido.repartidorId} key={pedido.repartidorId}>
-                {
-                    repartidores.map(repartidor =>
-                        <option key={repartidor.id} value={repartidor.id}>
-                            {repartidor.nombre}
-                        </option>
-                    )
-                }
-            </select>
+      <label>
+        {" "}
+        Nombre del cliente:
+        <input
+          name="direccion_cliente"
+          placeholder="Dirección cliente"
+          defaultValue={pedido.direccion_cliente}
+        />
+      </label>
 
+      <p className="font-bold">Repartidor</p>
+      <select
+        name="repartidorId"
+        defaultValue={pedido.repartidorId}
+        key={pedido.repartidorId}
+      >
+        {repartidores.map((repartidor) => (
+          <option key={repartidor.id} value={repartidor.id}>
+            {repartidor.nombre}
+          </option>
+        ))}
+      </select>
 
-            <p className="font-bold">Pizzas</p>
-            {
-                pizzas.map(pizza =>
-                    <label key={pizza.id}>
-                        <input
-                            type="checkbox"
-                            name={`pizza${pizza.id}`}
-                            value={pizza.id}
-                            defaultChecked={IDs.includes(pizza.id)}
-                        />
+      <p className="font-bold">Platos</p>
+      {platos.map((plato) => (
+        <label key={plato.id}>
+          <input
+            type="checkbox"
+            name={`plato${plato.id}`}
+            value={plato.id}
+            defaultChecked={IDs.includes(plato.id)}
+          />
 
-                        {pizza.nombre}
+          {plato.nombre}
+        </label>
+      ))}
 
-                    </label>
-                )
-            }
-
-
-            <button className="p-2 rounded-lg bg-yellow-400 text-white cursor-pointer">Modificar</button>
-        </form>
-    );
+      <button className="p-2 rounded-lg bg-yellow-400 text-white cursor-pointer">
+        Modificar
+      </button>
+    </form>
+  );
 }
 
 export default PedidoModificar;

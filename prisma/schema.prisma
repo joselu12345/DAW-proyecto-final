@@ -26,19 +26,19 @@ model Pedido {
   repartidor        Repartidor? @relation(fields: [repartidorId], references: [id])
   userId            String?
   user              User?       @relation(fields: [userId], references: [id])
-  pizzas            Pizza[]
+  platos            Plato[]
 
   @@map("pedidos")
 }
 
-model Pizza {
+model Plato {
   id      Int      @id @default(autoincrement())
   nombre  String
   precio  Float
   foto    String?
   pedidos Pedido[]
 
-  @@map("pizzas")
+  @@map("platos")
 }
 
 model User {
