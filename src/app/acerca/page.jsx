@@ -3,9 +3,9 @@ import Image from "next/image";
 function Acerca() {
   return (
     <div>
-      <h1 className="text-3xl font-bold p-8">Acerca de nosotros</h1>
+      <h1 className="text-3xl font-bold p-12 ml-20">Acerca de nosotros</h1>
 
-      <div className="flex flex-col gap-4 lg:flex-row p-8">
+      <div className="flex flex-col gap-4 lg:flex-row pl-20 pr-20 m-10">
         <div>
           <p>
             Restaurante Joselu llega a Montilla como absoluta novedad, un rincón
@@ -35,7 +35,13 @@ function Acerca() {
           </p>
         </div>
       </div>
-      <Image className="px-5 mx-auto" src="" width={400} height={700} alt="" />
+      <Image
+        className="px-5 mx-auto p-10"
+        src="/images/vista_restaurante.jpg"
+        width={400}
+        height={700}
+        alt=""
+      />
     </div>
   );
 }
