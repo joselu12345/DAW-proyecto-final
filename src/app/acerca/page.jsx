@@ -38,8 +38,8 @@ function Acerca() {
       <Image
         className="px-5 mx-auto p-10"
         src="/images/vista_restaurante.jpg"
-        width={400}
-        height={700}
+        width={600}
+        height={1000}
         alt=""
       />
     </div>
