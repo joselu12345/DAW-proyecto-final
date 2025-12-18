@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { auth } from "@/auth";
 import { logout } from "@/lib/actions";
-import { Soup } from "lucide-react";
+import { UtensilsCrossed } from "lucide-react";
 
 async function Header() {
   const session = await auth();
@@ -11,7 +11,7 @@ async function Header() {
     <header className="bg-slate-800 text-white flex px-10 py-2 justify-between items-center">
       <nav className="flex gap-4 items-center">
         <Link className="flex gap-3 items-center" href="/">
-          <Soup />{" "}
+          <UtensilsCrossed />{" "}
           <h1 className="text-2xl font-bold hidden md:block">
             Restaurante Joselu App
           </h1>
