@@ -8,9 +8,12 @@ async function Dashboard() {
   return (
     <div className="p-10 m-10">
       <h1 className="text-3xl font-bold">DASHBOARD</h1>
+      <img
+        src={sesion.user.image || "/images/default-user.png"}
+        className="size-80"
+      />
       <p>Nombre de usuario: {sesion.user.name}</p>
       <p>Correo: {sesion.user.email}</p>
-      <img src={sesion.user.image} />
     </div>
   );
 }
