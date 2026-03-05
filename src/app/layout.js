@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body
-        className={`antialiased min-h-screen bg-[url(/images/fondo2aclarado1.jpg)] bg-cover bg-bottom-left bg-fixed`}
+        className={`antialiased min-h-screen bg-[url(/images/fondo.jpg)] bg-cover bg-bottom-left bg-fixed`}
       >
         <Header />
         {children}
