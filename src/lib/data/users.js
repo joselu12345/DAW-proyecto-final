@@ -1,0 +1,41 @@
+"use server";
+
+import prisma from "@/lib/prisma";
+
+export async function obtenerUsuarios() {
+  const users = await prisma.user.findMany({
+    include: { pedidos: true },
+  });
+  return users;
+}
+
+export async function obtenerUsuarioPorId(id) {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id },
+      include: {
+        pedidos: true,
+        // pedidos: {
+        //     include: {
+        //         pedidoPizzas: {
+        //             include: {
+        //                 pizza: true
+        //             }
+        //         }
+        //     }
+        // }
+      },
+    });
+    return user;
+  } catch (error) {
+    console.log(error.message.split("\n").pop());
+    throw new Error(error.message.split("\n").pop());
+  }
+}
+
+export async function obtenerUsuarioPorEmail(email) {
+  const user = await prisma.user.findUnique({
+    where: { email },
+  });
+  return user;
+}

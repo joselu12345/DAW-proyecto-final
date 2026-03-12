@@ -4,7 +4,7 @@ import { Suspense } from "react";
 
 function PaginaPlatos() {
   return (
-    <div>
+    <div className="m-10">
       <Link href="/" className="text-5xl">
         🏡
       </Link>

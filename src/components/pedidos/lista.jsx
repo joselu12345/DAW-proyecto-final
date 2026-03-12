@@ -37,54 +37,60 @@ export default async function Pedidos() {
           user={sesion.user}
         />
       </Modal>
-      {pedidos.map((pedido) => (
-        <div key={pedido.id} className="p-4 mb-4 bg-cyan-100 rounded-lg">
-          <div className="flex flex-col gap-4">
-            <Link
-              href={`/pedidos/${pedido.id}`}
-              className="font-bold cursor-pointer"
-            >
-              {new Date(pedido.fecha_hora).toLocaleString()}
-            </Link>
-            <p>Nombre del cliente: {pedido.nombre_cliente}</p>
-            <p>Dirección del cliente: {pedido.direccion_cliente}</p>
-            <div>
-              Pedido:
-              {pedido.platos.map((plato) => (
-                <p key={plato.id} className="indent-8">
-                  {" "}
-                  {plato.nombre}{" "}
-                </p>
-              ))}
+
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">
+        {pedidos.map((pedido) => (
+          <div
+            key={pedido.id}
+            className="p-4 mb-4 bg-slate-200 rounded-lg shadow-md"
+          >
+            <div className="flex flex-col gap-4">
+              <Link
+                href={`/pedidos/${pedido.id}`}
+                className="font-bold cursor-pointer"
+              >
+                {new Date(pedido.fecha_hora).toLocaleString()}
+              </Link>
+              <p>Nombre del cliente: {pedido.nombre_cliente}</p>
+              <p>Dirección del cliente: {pedido.direccion_cliente}</p>
+              <div>
+                Pedido:
+                {pedido.platos.map((plato) => (
+                  <p key={plato.id} className="indent-8">
+                    {" "}
+                    {plato.nombre}{" "}
+                  </p>
+                ))}
+              </div>
+
+              <Modal
+                openElement={
+                  <p className="inline p-2 rounded-lg bg-yellow-400 text-white cursor-pointer">
+                    Modificar
+                  </p>
+                }
+              >
+                <PedidoModificar
+                  pedido={pedido}
+                  repartidores={repartidores}
+                  platos={platos}
+                />
+              </Modal>
+
+              <Modal
+                openElement={
+                  <p className="inline p-2 rounded-lg bg-red-600 text-white cursor-pointer">
+                    Eliminar
+                  </p>
+                }
+              >
+                <PedidoEliminar pedido={pedido} />
+              </Modal>
             </div>
-
-            <Modal
-              openElement={
-                <p className="inline p-2 rounded-lg bg-yellow-400 text-white cursor-pointer">
-                  Modificar
-                </p>
-              }
-            >
-              <PedidoModificar
-                pedido={pedido}
-                repartidores={repartidores}
-                platos={platos}
-              />
-            </Modal>
-
-            <Modal
-              openElement={
-                <p className="inline p-2 rounded-lg bg-red-600 text-white cursor-pointer">
-                  Eliminar
-                </p>
-              }
-            >
-              <PedidoEliminar pedido={pedido} />
-            </Modal>
+            <hr />
           </div>
-          <hr />
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
