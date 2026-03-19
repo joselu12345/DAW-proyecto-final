@@ -44,7 +44,7 @@ function PlatoModificar({ plato }) {
 
       <button
         disabled={pending}
-        className="p-2 rounded-lg bg-yellow-400 text-white cursor-pointer disabled:bg-gray-400 disabled:cursor-default"
+        className="p-2 rounded-lg bg-orange-400 text-white cursor-pointer disabled:bg-gray-400 disabled:cursor-default"
       >
         {pending ? "En proceso..." : "Modificar plato"}
       </button>

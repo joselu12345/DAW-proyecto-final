@@ -65,7 +65,7 @@ export default async function Pedidos() {
 
               <Modal
                 openElement={
-                  <p className="inline p-2 rounded-lg bg-yellow-400 text-white cursor-pointer">
+                  <p className="inline p-2 rounded-lg bg-orange-400 text-white cursor-pointer">
                     Modificar
                   </p>
                 }

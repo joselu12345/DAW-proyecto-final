@@ -37,7 +37,7 @@ export default async function Repartidores() {
 
               <Modal
                 openElement={
-                  <span className="p-2 rounded-lg bg-yellow-400 text-white cursor-pointer">
+                  <span className="p-2 rounded-lg bg-orange-400 text-white cursor-pointer">
                     Modificar
                   </span>
                 }
