@@ -10,6 +10,7 @@ import PedidoInsertar from "./insertar";
 import PedidoModificar from "./modificar";
 import PedidoEliminar from "./eliminar";
 import { auth } from "@/auth";
+import { obtenerUsuarioPorId } from "@/lib/data/users";
 
 export default async function Pedidos() {
   const sesion = await auth();
@@ -21,6 +22,7 @@ export default async function Pedidos() {
 
   const repartidores = await obtenerRepartidores();
   const platos = await obtenerPlatos();
+  const usuario = await obtenerUsuarioPorId(sesion.user.id);
 
   return (
     <div className="flex flex-col gap-4">
@@ -34,7 +36,7 @@ export default async function Pedidos() {
         <PedidoInsertar
           repartidores={repartidores}
           platos={platos}
-          user={sesion.user}
+          user={usuario}
         />
       </Modal>
 
@@ -52,7 +54,7 @@ export default async function Pedidos() {
                 {new Date(pedido.fecha_hora).toLocaleString()}
               </Link>
               <p>Nombre del cliente: {pedido.nombre_cliente}</p>
-              <p>Dirección del cliente: {pedido.direccion_cliente}</p>
+              <p>Dirección de envío: {pedido.direccion_cliente}</p>
               <div>
                 Pedido:
                 {pedido.platos.map((plato) => (

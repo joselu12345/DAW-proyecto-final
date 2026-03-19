@@ -38,8 +38,23 @@ function PedidoInsertar({ repartidores, platos, user }) {
 
       <label>
         {" "}
-        Dirección del cliente:
-        <input name="direccion_cliente" placeholder="Dirección cliente" />
+        Domicilio del cliente:
+        <input
+          readOnly
+          defaultValue={user.address}
+          placeholder="Domicilio cliente"
+          className="outline-none"
+        />
+      </label>
+
+      <label>
+        {" "}
+        Dirección de envío:
+        <input
+          defaultValue={user.address}
+          name="direccion_cliente"
+          placeholder="Dirección cliente"
+        />
       </label>
 
       <p className="font-bold">Repartidor</p>

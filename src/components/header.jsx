@@ -8,7 +8,7 @@ async function Header() {
   // console.log(session);
 
   return (
-    <header className="bg-slate-800 text-white flex px-10 py-2 justify-between items-center">
+    <header className="fixed w-full bg-slate-800 text-white flex px-10 py-2 justify-between items-center">
       <nav className="flex gap-4 items-center">
         <Link className="flex gap-3 items-center" href="/">
           <UtensilsCrossed />{" "}

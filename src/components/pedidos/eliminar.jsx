@@ -22,7 +22,9 @@ function PedidoEliminar({ pedido }) {
       </h1>
       <p>FECHA Y HORA: {new Date(pedido.fecha_hora).toLocaleString()}</p>
       <p>NOMBRE CLIENTE: {pedido.nombre_cliente}</p>
-      <p>DIRECCIÓN CLIENTE: {pedido.direccion_cliente}</p>
+      <p>DOMICILIO CLIENTE: {pedido.user?.address || "sin domicilio"}</p>
+      <p>DIRECCIÓN DE ENVÍO: {pedido.direccion_cliente}</p>
+
       <form className="flex flex-col gap-4" action={action} id={formId}>
         <input type="hidden" name="id" defaultValue={pedido.id} />
         <button

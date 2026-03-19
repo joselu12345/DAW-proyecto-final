@@ -44,7 +44,18 @@ function PedidoModificar({ pedido, repartidores, platos }) {
 
       <label>
         {" "}
-        Nombre del cliente:
+        Domicilio del cliente:
+        <input
+          readOnly
+          placeholder="Domicilio del cliente"
+          defaultValue={pedido.user.address}
+          className="outline-none"
+        />
+      </label>
+
+      <label>
+        {" "}
+        Dirección de envío:
         <input
           name="direccion_cliente"
           placeholder="Dirección cliente"
