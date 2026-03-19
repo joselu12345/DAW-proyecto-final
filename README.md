@@ -1,5 +1,9 @@
 # Proyecto DAW - Restaurante Joselu
 
+## Modelo ER
+
+![Diagrama ER](public/images/diagrama_ER_restaurante.png)
+
 ## INSTRUCCIONES
 
 1. Crear base de datos `restaurante` vacía en MySQL o Postgres.
