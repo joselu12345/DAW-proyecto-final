@@ -1,6 +1,7 @@
 "use client";
 import { modificarPedido } from "@/lib/actions";
 import { useActionState, useEffect, useId } from "react";
+import { toast } from "sonner";
 
 function PedidoModificar({ pedido, repartidores, platos }) {
   const formId = useId();
@@ -9,7 +10,7 @@ function PedidoModificar({ pedido, repartidores, platos }) {
 
   useEffect(() => {
     if (state.success) {
-      // toast.success(state.success)
+      toast.success(state.success);
       document.getElementById(formId)?.closest("dialog")?.close();
     }
   }, [state]);
@@ -78,8 +79,11 @@ function PedidoModificar({ pedido, repartidores, platos }) {
         </label>
       ))}
 
-      <button className="p-2 rounded-lg bg-yellow-400 text-white cursor-pointer">
-        Modificar
+      <button
+        disabled={pending}
+        className="p-2 rounded-lg bg-yellow-400 text-white cursor-pointer disabled:bg-gray-400 disabled:cursor-default"
+      >
+        {pending ? "En proceso..." : "Modificar pedido"}
       </button>
     </form>
   );

@@ -50,6 +50,8 @@ model User {
   image         String?
   role          String?   @default("USER") // o  ADMIN
   active        Boolean   @default(true)
+  address       String?
+  phone         String?
   accounts      Account[]
   pedidos       Pedido[]
 }

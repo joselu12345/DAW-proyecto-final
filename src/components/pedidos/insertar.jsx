@@ -1,6 +1,7 @@
 "use client";
 import { insertarPedido } from "@/lib/actions";
 import { useActionState, useEffect, useId } from "react";
+import { toast } from "sonner";
 
 function PedidoInsertar({ repartidores, platos, user }) {
   const formId = useId();
@@ -9,7 +10,7 @@ function PedidoInsertar({ repartidores, platos, user }) {
 
   useEffect(() => {
     if (state.success) {
-      // toast.success(state.success)
+      toast.success(state.success);
       document.getElementById(formId)?.closest("dialog")?.close();
     }
   }, [state]);
@@ -59,8 +60,11 @@ function PedidoInsertar({ repartidores, platos, user }) {
         </label>
       ))}
 
-      <button className="p-2 rounded-lg bg-green-500 text-white cursor-pointer">
-        Insertar pedido
+      <button
+        disabled={pending}
+        className="p-2 rounded-lg bg-green-500 text-white cursor-pointer disabled:bg-gray-400 disabled:cursor-default"
+      >
+        {pending ? "En proceso..." : "Insertar pedido"}
       </button>
     </form>
   );

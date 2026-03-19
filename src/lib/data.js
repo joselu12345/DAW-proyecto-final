@@ -25,6 +25,7 @@ async function obtenerPedidos() {
     include: {
       repartidor: true,
       platos: true,
+      user: true,
     },
   });
   return pedidos;
@@ -36,6 +37,7 @@ async function obtenerPedido(id) {
     include: {
       repartidor: true,
       platos: true,
+      user: true,
     },
   });
   return pedido;
@@ -47,6 +49,7 @@ async function obtenerPedidosDeUsuario(userId) {
     include: {
       repartidor: true,
       platos: true,
+      user: true,
     },
   });
   return pedidos;

@@ -3,19 +3,17 @@ import authConfig from "./auth.config";
 
 const { auth } = NextAuth(authConfig);
 
-export default auth(
-  //(request) => {
-  function middleware(request) {
-    console.log(`MIDDLEWARWE`, request.nextUrl.pathname, request.auth);
+export default auth((request) => {
+  //function proxy(request) {
+  console.log(`PROXY`, request.nextUrl.pathname, request.auth);
 
-    if (!request.auth) {
-      const callbackUrl = request.nextUrl.pathname + request.nextUrl.search;
-      const encodedCallbackUrl = encodeURIComponent(callbackUrl);
+  if (!request.auth) {
+    const callbackUrl = request.nextUrl.pathname + request.nextUrl.search;
+    const encodedCallbackUrl = encodeURIComponent(callbackUrl);
 
-      return Response.redirect(request.nextUrl.origin + "/auth/login");
-    }
+    return Response.redirect(request.nextUrl.origin + "/auth/login");
   }
-);
+});
 
 // export const config = {
 //   matcher: [ '/productos(.*)', '/proveedores', '/dashboard' ]

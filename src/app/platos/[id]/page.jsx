@@ -5,7 +5,7 @@ async function PaginaPlato({ params, searchParams }) {
   const { id } = await params;
 
   return (
-    <div>
+    <div className="p-4 md:p-10 md:px-32">
       <h1 className="font-bold text-2xl">DATOS DE PLATO</h1>
       <Suspense
         fallback={

@@ -10,7 +10,7 @@ import { getUserByEmail } from "@/lib/data";
 
 //  ------------------------ REPARTIDORES ------------------------
 
-export async function insertarRepartidor(formData) {
+export async function insertarRepartidor(prevstate, formData) {
   const nombre = formData.get("nombre");
   const telefono = formData.get("telefono");
 
@@ -22,9 +22,10 @@ export async function insertarRepartidor(formData) {
   });
 
   revalidatePath("/repartidores");
+  return { success: "Operación realizada correctamente" };
 }
 
-export async function modificarRepartidor(formData) {
+export async function modificarRepartidor(prevstate, formData) {
   const id = Number(formData.get("id"));
   const nombre = formData.get("nombre");
   const telefono = formData.get("telefono");
@@ -40,9 +41,10 @@ export async function modificarRepartidor(formData) {
   });
 
   revalidatePath("/repartidores");
+  return { success: "Operación realizada correctamente" };
 }
 
-export async function eliminarRepartidor(formData) {
+export async function eliminarRepartidor(prevstate, formData) {
   const id = Number(formData.get("id"));
 
   await prisma.repartidor.delete({
@@ -52,6 +54,7 @@ export async function eliminarRepartidor(formData) {
   });
 
   revalidatePath("/repartidores");
+  return { success: "Operación realizada correctamente" };
 }
 
 //  ------------------------ PEDIDOS ------------------------
@@ -69,7 +72,7 @@ export async function insertarPedido(prevState, formData) {
   });
   // console.log(platosIDs);
   const connect = platosIDs.filter(
-    (p) => formData.get(`plato${p.id}`) !== null
+    (p) => formData.get(`plato${p.id}`) !== null,
   );
   // console.log(connect);
 
@@ -101,10 +104,10 @@ export async function modificarPedido(prevState, formData) {
   });
   // console.log(platosIDs);
   const connect = platosIDs.filter(
-    (p) => formData.get(`plato${p.id}`) !== null
+    (p) => formData.get(`plato${p.id}`) !== null,
   );
   const disconnect = platosIDs.filter(
-    (p) => formData.get(`plato${p.id}`) === null
+    (p) => formData.get(`plato${p.id}`) === null,
   );
   // console.log(connect);
 
@@ -140,7 +143,7 @@ export async function eliminarPedido(prevState, formData) {
 
 // ------------------------------- PLATOS -----------------------
 
-export async function insertarPlato(formData) {
+export async function insertarPlato(prevState, formData) {
   const nombre = formData.get("nombre");
   const precio = Number(formData.get("precio"));
   const foto = formData.get("foto");
@@ -157,7 +160,7 @@ export async function insertarPlato(formData) {
   return { success: "Éxito al realizar la operación" };
 }
 
-export async function modificarPlato(formData) {
+export async function modificarPlato(prevState, formData) {
   const id = Number(formData.get("id"));
   const nombre = formData.get("nombre");
   const precio = Number(formData.get("precio"));
@@ -175,9 +178,10 @@ export async function modificarPlato(formData) {
   });
 
   revalidatePath("/platos");
+  return { success: "Éxito al realizar la operación" };
 }
 
-export async function eliminarPlato(formData) {
+export async function eliminarPlato(prevState, formData) {
   const id = Number(formData.get("id"));
 
   await prisma.plato.delete({
@@ -187,6 +191,7 @@ export async function eliminarPlato(formData) {
   });
 
   revalidatePath("/platos");
+  return { success: "Éxito al realizar la operación" };
 }
 
 //////////////////////////////////////////////////////////////////////////////////////

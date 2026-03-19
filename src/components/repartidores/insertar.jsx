@@ -1,22 +1,42 @@
+"use client";
 import { insertarRepartidor } from "@/lib/actions";
+import { useActionState, useEffect, useId } from "react";
+import { toast } from "sonner";
 
 function RepartidorInsertar() {
-    return (
-        <form className="flex flex-col gap-4" action={insertarRepartidor}>
-            <h1 className="text-xl text-blue-500">Nuevo repartidor</h1>
+  const formId = useId();
 
-            <label>Nombre:
-                <input name='nombre' placeholder="Nombre" />
-            </label>
+  const [state, action, pending] = useActionState(insertarRepartidor, {});
 
-            <label>Teléfono:
-                <input name='telefono' placeholder="Teléfono" />
-            </label>
+  useEffect(() => {
+    if (state.success) {
+      toast.success(state.success);
+      document.getElementById(formId)?.closest("dialog")?.close();
+    }
+  }, [state]);
 
-            <button className="p-2 rounded-lg bg-green-500 text-white cursor-pointer">Insertar repartidor</button>
-        </form>
+  return (
+    <form className="flex flex-col gap-4" action={action} id={formId}>
+      <h1 className="text-xl text-blue-500">Nuevo repartidor</h1>
 
-    );
+      <label>
+        Nombre:
+        <input name="nombre" placeholder="Nombre" />
+      </label>
+
+      <label>
+        Teléfono:
+        <input name="telefono" placeholder="Teléfono" />
+      </label>
+
+      <button
+        disabled={pending}
+        className="p-2 rounded-lg bg-green-500 text-white cursor-pointer disabled:bg-gray-400 disabled:cursor-default"
+      >
+        {pending ? "En proceso..." : "Insertar repartidor"}
+      </button>
+    </form>
+  );
 }
 
 export default RepartidorInsertar;

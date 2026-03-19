@@ -1,23 +1,44 @@
+"use client";
 import { modificarRepartidor } from "@/lib/actions";
+import { useActionState, useEffect, useId } from "react";
+import { toast } from "sonner";
 
 function RepartidorModificar({ repartidor }) {
-    return (
-        <form className="flex flex-col gap-4" action={modificarRepartidor}>
-            <h1 className="text-xl text-blue-500">Modificar repartidor</h1>
+  const formId = useId();
 
-            <input type="hidden" name="id" defaultValue={repartidor.id} />
+  const [state, action, pending] = useActionState(modificarRepartidor, {});
 
-            <label>Nombre:
-                <input name='nombre' defaultValue={repartidor.nombre} />
-            </label>
+  useEffect(() => {
+    if (state.success) {
+      toast.success(state.success);
+      document.getElementById(formId)?.closest("dialog")?.close();
+    }
+  }, [state]);
 
-            <label>Teléfono:
-                <input name='telefono' defaultValue={repartidor.telefono} />
-            </label>
+  return (
+    <form className="flex flex-col gap-4" action={action} id={formId}>
+      <h1 className="text-xl text-blue-500">Modificar repartidor</h1>
 
-            <button className="p-2 rounded-lg bg-yellow-400 text-white cursor-pointer">Modificar</button>
-        </form>
-    );
+      <input type="hidden" name="id" defaultValue={repartidor.id} />
+
+      <label>
+        Nombre:
+        <input name="nombre" defaultValue={repartidor.nombre} />
+      </label>
+
+      <label>
+        Teléfono:
+        <input name="telefono" defaultValue={repartidor.telefono} />
+      </label>
+
+      <button
+        disabled={pending}
+        className="p-2 rounded-lg bg-yellow-400 text-white cursor-pointer disabled:bg-gray-400 disabled:cursor-default"
+      >
+        {pending ? "En proceso..." : "Modificar repartidor"}
+      </button>
+    </form>
+  );
 }
 
 export default RepartidorModificar;
